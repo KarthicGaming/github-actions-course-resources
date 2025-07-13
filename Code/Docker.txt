@@ -1,0 +1,79 @@
+Diff btw container and image
+
+Container is running env for image
+(file system, env config, app image)
+
+Virtual file system
+
+commands
+docker pull <app name>
+docker image (give all available images)
+
+docker run <app name> (get or install application)
+
+docker ps (status of all the running docker conatiner)
+
+docker run -d(detach mode so that we dont need to keep CMD active)
+
+--get container ID
+
+docker stop <container ID>
+docker start <container ID>
+docker ps -a (show all container running or not running)
+
+docker run <app name>:<Version>
+
+How to use the container
+    explanation
+
+    Container port vs host port
+
+    docker run -p6000:6379 <app name>
+
+docker exec -it <container id> /bin/bash (allow to go inside 
+virtual file system to navigate to check the values)
+
+docker network ls (get all network available)
+
+docker network create mongo-network (create new network)
+
+docker container rm -f <conatiner id>
+
+docker logs <conatiner id> | tail (get last part)
+----------------------------------------------------------------
+--example
+docker run -p 27107:27107 -d -e MONGO_INITDB_ROOT_USERNAME=admin 
+-e MONGO_INITDB_ROOT_PASSWORD=password 
+--name mongodb --net mongo-network mongo
+
+docker run --network mongo-network 
+-e ME_CONFIG_MONGODB_ADMINUSERNAME=admin -p 8081:8081 
+--name mongo-express -e ME_CONFIG_MONGODB_SERVER=mongo 
+-e ME_CONFIG_MONGODB_ADMINPASSWORD=password -d mongo-express
+
+----------------------------------------------------------------
+
+Docker compose (adv: create network on its own )
+
+version: '3'
+services:
+    mongodb:
+        image:mongo
+        ports:
+            -27017:27017
+        environment
+            -username and password command line
+    mongo-express
+        image: mongo-express
+        ports:
+
+        environment:
+
+command line
+docker-compose -f mongo.yaml up
+docker-compose -f mongo.yaml down
+
+-----------------------------------------------------------------
+
+Create a own docker images
+
