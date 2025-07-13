@@ -77,3 +77,22 @@ docker-compose -f mongo.yaml down
 
 Create a own docker images
 
+docker file - blueprint for creating docker images
+
+FROM node (base installation needed)
+
+ENV USERNAME = ""
+    password = ""
+
+RUN mkdir -p /home/app (create file inside docker)
+COPY . /home/app (copying from host to docker)
+
+CMD ["node","/home/app/server.js"]
+
+command line to run docker file: 
+    docker build -t my-app:1.0 .(location of docker file)
+
+Note: save file as "Dockerfile" - no changes in name allowed
+cannote overrite the image - need to rebuild the image
+
+
